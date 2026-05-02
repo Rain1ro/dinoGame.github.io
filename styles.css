@@ -10,12 +10,12 @@
 }
 
 #dino {
-  width: 15%;               /* proporción relativa */
-  height: 45px;
+  width: 44px;               /* proporción relativa */
+  height: 44px;
   background: url('Dino.PNG') no-repeat center/cover;
   position: absolute;
   bottom: 0;
-  left: 8%;                 /* posición relativa */
+  left: 50px;                 /* posición relativa */
 }
 
 #obstacle {
