@@ -27,10 +27,7 @@ body {
   animation: run 0.5s steps(2) infinite;
 
 }
-@keyframes run {
-  from { background-position: 0px; }
-  to { background-position: -88px; }
-}
+
 
 #obstacle {
   width: 30px;
@@ -47,4 +44,9 @@ body {
   left: 10px;
   font-family: Arial, sans-serif;
   font-size: 18px;
+}
+
+@keyframes run {
+  from { background-position: 0px; }
+  to { background-position: -88px; }
 }
