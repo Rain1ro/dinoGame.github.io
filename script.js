@@ -1,5 +1,4 @@
-// script.js
-const dino = document.getElementById("Dino");
+const dino = document.getElementById("dino");
 const obstacle = document.getElementById("obstacle");
 const scoreDisplay = document.getElementById("score");
 
@@ -7,40 +6,37 @@ let isJumping = false;
 let dinoBottom = 0;
 let score = 0;
 let speed = 5;
-
-// salto
-function jump() {
-  if (isJumping) return;
-  isJumping = true;
-  // Pausar animación de correr
-  dino.style.animation = "none";
-  dino.style.backgroundPosition = "0px";
-
-  let upInterval = setInterval(() => {
-    if (dinoBottom >= 80) {
-      clearInterval(upInterval);
-      let downInterval = setInterval(() => {
-        if (dinoBottom <= 0) {
-          clearInterval(downInterval);
-          isJumping = false;
-           // Reanudar animación de correr
-          dino.style.animation = "run 0.5s steps(2) infinite";
-
-        }
-        dinoBottom -= 5;
-        dino.style.bottom = dinoBottom + "px";
-      }, 20);
-    }
-    dinoBottom += 5;
-    dino.style.bottom = dinoBottom + "px";
-  }, 20);
-}
-
-// mover obstáculo
-let score = 0;
-let speed = 5;
 let gameOver = false;
 
+// salto del dino (funciona con teclado y pantalla táctil)
+document.addEventListener("keydown", jump);
+document.addEventListener("touchstart", jump);
+
+function jump() {
+  if (!isJumping) {
+    isJumping = true;
+    let jumpHeight = 0;
+    let upInterval = setInterval(() => {
+      if (jumpHeight >= 80) {
+        clearInterval(upInterval);
+        let downInterval = setInterval(() => {
+          if (jumpHeight <= 0) {
+            clearInterval(downInterval);
+            isJumping = false;
+          }
+          jumpHeight -= 5;
+          dinoBottom = jumpHeight;
+          dino.style.bottom = dinoBottom + "px";
+        }, 20);
+      }
+      jumpHeight += 5;
+      dinoBottom = jumpHeight;
+      dino.style.bottom = dinoBottom + "px";
+    }, 20);
+  }
+}
+
+// movimiento del obstáculo
 function moveObstacle() {
   let obstacleLeft = 600;
   obstacle.style.left = obstacleLeft + "px";
@@ -60,11 +56,11 @@ function moveObstacle() {
 
       // alternar cactus y roca
       if (Math.random() > 0.5) {
-        obstacle.style.width = "30px";
+        obstacle.style.width = "8%";
         obstacle.style.height = "50px";
         obstacle.style.background = "url('cactus.PNG') no-repeat center/cover";
       } else {
-        obstacle.style.width = "40px";
+        obstacle.style.width = "10%";
         obstacle.style.height = "25px";
         obstacle.style.background = "url('rocas.PNG') no-repeat center/cover";
       }
@@ -73,18 +69,13 @@ function moveObstacle() {
     }
     obstacle.style.left = obstacleLeft + "px";
 
-    // colisión
+    // detección de colisión
     if (obstacleLeft > 50 && obstacleLeft < 90 && dinoBottom < obstacle.offsetHeight) {
       alert("¡Game Over! Puntuación final: " + score);
       gameOver = true;
-      setTimeout(() => location.reload(), 2000); // reinicia el juego
+      setTimeout(() => location.reload(), 2000);
     }
   }, 20);
 }
-
-
-
-document.addEventListener("keydown", jump);
-document.addEventListener("touchstart", jump); // para celular
 
 moveObstacle();
