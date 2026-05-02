@@ -10,8 +10,8 @@
 }
 
 #dino {
-  width: 44px;               /* proporción relativa */
-  height: 44px;
+  width: 107px;               /* proporción relativa */
+  height: 111px;
   background: url('Dino.PNG') no-repeat center/cover;
   position: absolute;
   bottom: 0;
