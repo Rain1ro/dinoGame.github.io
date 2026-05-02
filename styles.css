@@ -1,0 +1,50 @@
+/* styles.css */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f0f0f0;
+}
+
+#game {
+  width: 600px;
+  height: 200px;
+  background: white;
+  border: 2px solid #333;
+  position: relative;
+  overflow: hidden;
+}
+
+#dino {
+  width: 44px;
+  height: 44px;
+  background:url('https://i.imgur.com/2vQtZBb.png') no-repeat;
+  position: absolute;
+  bottom: 0;
+  left: 50px;
+  /* Animación de correr */
+  animation: run 0.5s steps(2) infinite;
+
+}
+@keyframes run {
+  from { background-position: 0px; }
+  to { background-position: -88px; }
+}
+
+#obstacle {
+  width: 30px;
+  height: 50px;
+  background: url('https://i.imgur.com/1cXQnQk.png') no-repeat center/cover;
+  position: absolute;
+  bottom: 0;
+  right: -40px;
+}
+
+#score {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+}
