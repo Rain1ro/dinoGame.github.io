@@ -1,5 +1,5 @@
 // script.js
-const dino = document.getElementById("dino");
+const dino = document.getElementById("Dino");
 const obstacle = document.getElementById("obstacle");
 const scoreDisplay = document.getElementById("score");
 
@@ -62,11 +62,11 @@ function moveObstacle() {
       if (Math.random() > 0.5) {
         obstacle.style.width = "30px";
         obstacle.style.height = "50px";
-        obstacle.style.background = "url('cactus.png') no-repeat center/cover";
+        obstacle.style.background = "url('cactus.PNG') no-repeat center/cover";
       } else {
         obstacle.style.width = "40px";
         obstacle.style.height = "25px";
-        obstacle.style.background = "url('roca.png') no-repeat center/cover";
+        obstacle.style.background = "url('rocas.PNG') no-repeat center/cover";
       }
     } else {
       obstacleLeft -= speed;
