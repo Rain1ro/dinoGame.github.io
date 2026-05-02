@@ -12,7 +12,7 @@
 #dino {
   width: 107px;               /* proporción relativa */
   height: 111px;
-  background: url('Dino.PNG') no-repeat center/cover;
+  background: url('Dino.PNG') no-repeat center/contain;
   position: absolute;
   bottom: 0;
   left: 50px;                 /* posición relativa */
