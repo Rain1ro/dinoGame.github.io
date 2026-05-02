@@ -37,30 +37,36 @@ function jump() {
 }
 
 // mover obstáculo
+let score = 0;
+let speed = 5;
+let gameOver = false;
+
 function moveObstacle() {
   let obstacleLeft = 600;
   obstacle.style.left = obstacleLeft + "px";
 
   let moveInterval = setInterval(() => {
+    if (gameOver) {
+      clearInterval(moveInterval);
+      return;
+    }
+
     if (obstacleLeft < -40) {
       obstacleLeft = 600;
       score++;
       scoreDisplay.textContent = "Puntuación: " + score;
 
-      // aumentar velocidad cada 5 puntos
-      if (score % 5 === 0) {
-        speed++;
-      }
+      if (score % 5 === 0) speed++;
 
-      // cambiar tipo de obstáculo
+      // alternar cactus y roca
       if (Math.random() > 0.5) {
         obstacle.style.width = "30px";
         obstacle.style.height = "50px";
-        obstacle.style.background = "url('https://i.imgur.com/1cXQnQk.png') no-repeat center/cover"; // cactus
+        obstacle.style.background = "url('cactus.png') no-repeat center/cover";
       } else {
         obstacle.style.width = "40px";
         obstacle.style.height = "25px";
-        obstacle.style.background = "url('https://i.imgur.com/8Q2QnQk.png') no-repeat center/cover"; // roca
+        obstacle.style.background = "url('roca.png') no-repeat center/cover";
       }
     } else {
       obstacleLeft -= speed;
@@ -70,10 +76,13 @@ function moveObstacle() {
     // colisión
     if (obstacleLeft > 50 && obstacleLeft < 90 && dinoBottom < obstacle.offsetHeight) {
       alert("¡Game Over! Puntuación final: " + score);
-      clearInterval(moveInterval);
+      gameOver = true;
+      setTimeout(() => location.reload(), 2000); // reinicia el juego
     }
   }, 20);
 }
+
+
 
 document.addEventListener("keydown", jump);
 document.addEventListener("touchstart", jump); // para celular
