@@ -23,7 +23,7 @@
   position: absolute;
   top: 150px;
   width: 100%;
-  height: 2px;
+  height: 1px;
   background: #ccc; /* gris claro para día */
 }
 
@@ -35,7 +35,7 @@
 #dino {
   width: 5vw;               /* tamaño relativo al ancho de pantalla */
   height: 5vw;
-  background: url('Dino1.png') no-repeat center/contain;
+  background: url('Dino1.PNG') no-repeat center/contain;
   position: absolute;
   bottom: 0;
   left: 50px;
