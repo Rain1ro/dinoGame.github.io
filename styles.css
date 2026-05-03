@@ -1,7 +1,7 @@
 #game {
-  width: 100%;
-  max-width: 800px;
-  height: 300px;
+  width: 100%;              /* ocupa todo el ancho disponible */
+  max-width: 100vw;         /* nunca más ancho que la pantalla */
+  height: 40vh;             /* altura proporcional a la pantalla */
   background: #ffffff; /* fondo blanco */
   position: relative;
   overflow: hidden;
@@ -33,8 +33,8 @@
 
 /* Dino */
 #dino {
-  width: 60px;
-  height: 60px;
+  width: 5vw;               /* tamaño relativo al ancho de pantalla */
+  height: 5vw;
   background: url('Dino1.png') no-repeat center/contain;
   position: absolute;
   bottom: 0;
