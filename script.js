@@ -10,14 +10,15 @@ let frame = 1;
 let jumpPhase = "up";
 let obstacles = [];
 
-
-// salto del dino
+// salto dinámico
 document.addEventListener("keydown", e => {
-  if (e.code === "Space") jump(true); // mantener apretado
+  if (e.code === "Space") jump(true);
 });
 document.addEventListener("keyup", e => {
-  if (e.code === "Space") jump(false); // soltar
+  if (e.code === "Space") jump(false);
 });
+document.addEventListener("touchstart", () => jump(true));
+document.addEventListener("touchend", () => jump(false));
 
 function jump(holding) {
   if (!isJumping) {
@@ -89,7 +90,7 @@ function animatePtero(ptero) {
   setInterval(() => {
     frame = frame === 1 ? 2 : 1;
     ptero.style.background = `url('Pterodacty${frame}.PNG') no-repeat center/contain`;
-  }, 120); // más rápido para simular aleteo
+  }, 120); // más rápido
 }
 
 // movimiento y colisión
@@ -102,25 +103,37 @@ function moveObstacles() {
     if (obstacleLeft < -60) {
       obstacle.remove();
       obstacles.splice(index, 1);
-    score++;
-scoreDisplay.textContent = "Score: " + score;
-if (score % 10 === 0) speed++;
-updateDayNight();
-
+      score++;
+      scoreDisplay.textContent = "Score: " + score;
+      if (score % 10 === 0) speed++;
+      updateDayNight();
     }
 
     const dinoRect = dino.getBoundingClientRect();
     const obsRect = obstacle.getBoundingClientRect();
-if (
-  dinoRect.right > obsRect.left &&
-  dinoRect.left < obsRect.right &&
-  dinoRect.bottom > obsRect.top &&
-  !(obstacle.classList.contains("ptero") && dinoRect.top > obsRect.bottom)
-) {
-  endGame();
+
+    if (
+      dinoRect.right > obsRect.left &&
+      dinoRect.left < obsRect.right &&
+      dinoRect.bottom > obsRect.top &&
+      !(obstacle.classList.contains("ptero") && dinoRect.top > obsRect.bottom)
+    ) {
+      endGame();
+    }
+  });
 }
 
-  });
+// ciclo día/noche cada 10 puntos
+function updateDayNight() {
+  if (score > 0 && score % 10 === 0) {
+    if (game.classList.contains("day")) {
+      game.classList.remove("day");
+      game.classList.add("night");
+    } else {
+      game.classList.remove("night");
+      game.classList.add("day");
+    }
+  }
 }
 
 // fin del juego con reinicio sin recargar
@@ -153,27 +166,20 @@ function restartGame() {
 
   document.getElementById("game-over").remove();
 
-  // crear obstáculo inicial inmediato
+  // reinicia en modo día
+  game.classList.remove("night");
+  game.classList.add("day");
+
+  // obstáculo inicial inmediato
   createObstacle();
-}
-function updateDayNight() {
-  if (score > 0 && score % 10 === 0) { 
-    // cada 50 puntos cambia
-    if (game.classList.contains("day")) {
-      game.classList.remove("day");
-      game.classList.add("night");
-    } else {
-      game.classList.remove("night");
-      game.classList.add("day");
-    }
-  }
 }
 
 // bucles principales
 setInterval(() => {
-  if (!gameOver && Math.random() < 0.1) createObstacle();
-}, 700);
+  if (!gameOver && Math.random() < 0.1) createObstacle(); // más frecuencia
+}, 800);
 
 setInterval(() => {
   if (!gameOver) moveObstacles();
 }, 20);
+
