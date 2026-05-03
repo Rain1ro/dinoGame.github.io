@@ -1,37 +1,125 @@
 #game {
-  width: 100%;              /* ocupa todo el ancho disponible */
-  max-width: 600px;         /* límite máximo en pantallas grandes */
-  height: 200px;
-  background: #42c9e7;
-  border: 2px solid #333;
+  width: 100%;
+  max-width: 800px;
+  height: 300px;
+  background: #ffffff; /* fondo blanco */
   position: relative;
   overflow: hidden;
-  margin: auto;             /* centra en pantallas grandes */
+  margin: auto;
+}
+/* Día */
+#game.day {
+  background: #ffffff; /* blanco */
+  color: #333;
 }
 
+/* Noche */
+#game.night {
+  background: #000000; /* negro */
+  color: #fff;
+}
+
+#horizon {
+  position: absolute;
+  top: 150px;
+  width: 100%;
+  height: 2px;
+  background: #ccc; /* gris claro para día */
+}
+
+#game.night #horizon {
+  background: #666; /* gris oscuro para noche */
+}
+
+/* Dino */
 #dino {
-  width: 60px;               /* proporción relativa */
+  width: 60px;
   height: 60px;
-  background: url('Dino.PNG') no-repeat center/contain;
+  background: url('Dino1.png') no-repeat center/contain;
   position: absolute;
   bottom: 0;
-  left: 50px;                 /* posición relativa */
+  left: 50px;
 }
 
-#obstacle {
-  width: 8%;
-  height: 50px;
-  background: url('cactus.PNG') no-repeat center/cover;
+/* Línea del suelo */
+#ground {
   position: absolute;
   bottom: 0;
-  right: -10%;
+  width: 200%;
+  height: 5px;
+  background: #333; /* línea oscura simulando suelo */
+  animation: moveGround 2s linear infinite;
 }
 
+@keyframes moveGround {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Obstáculos base */
+.obstacle {
+  position: absolute;
+}
+
+/* Cactus variantes */
+.obstacle.cactus1 {
+  width: 40px;
+  height: 70px;
+  background: url('cactus1.PNG') no-repeat center/contain;
+  bottom: 0;
+}
+
+.obstacle.cactus2 {
+  width: 45px;
+  height: 72px;
+  background: url('cactus2.PNG') no-repeat center/contain;
+  bottom: 0;
+}
+
+/* Rocas */
+.obstacle.rock {
+  width: 60px;
+  height: 30px;
+  background: url('rocas.PNG') no-repeat center/contain;
+  bottom: 0;
+}
+
+/* Pterodáctilos */
+.obstacle.ptero {
+  width: 70px;
+  height: 45px;
+  background: url('Pterodacty1.PNG') no-repeat center/contain;
+  bottom: 120px; /* altura base de vuelo */
+}
+
+/* Score */
 #score {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  font-family: Arial, sans-serif;
-  font-size: 4vw;           /* tamaño relativo a pantalla */
+  top: 15px;
+  right: 15px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 24px;
   font-weight: bold;
+  color: #333;
+}
+
+/* Game Over */
+#game-over {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+#game-over button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 16px;
+  cursor: pointer;
 }
